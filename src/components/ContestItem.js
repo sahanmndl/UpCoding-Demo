@@ -1,4 +1,4 @@
-import {TouchableOpacity, Text, View, Linking, Platform, StyleSheet} from "react-native";
+import {TouchableOpacity, Text, View, Linking, Platform, StyleSheet, Dimensions} from "react-native";
 import Colors from "../constants/Colors";
 
 const ContestItem = ({item}) => {
@@ -13,10 +13,10 @@ const ContestItem = ({item}) => {
             <Text style={styles.site} numberOfLines={1}>
                 {site}
             </Text>
-            <Text style={styles.site} numberOfLines={1}>
+            <Text style={styles.time} numberOfLines={1}>
                 Start Time - {start_time}
             </Text>
-            <Text style={styles.site} numberOfLines={1}>
+            <Text style={styles.time} numberOfLines={1}>
                 End Time - {end_time}
             </Text>
             <View style={styles.statusBar}>
@@ -30,14 +30,16 @@ const ContestItem = ({item}) => {
 
 export default ContestItem
 
+const WIDTH = Dimensions.get("window").width
+
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 8,
         paddingStart: 8,
         paddingEnd: 8,
         borderRadius: 8,
-        marginVertical: 8,
-        width: Platform.OS === 'web' ? "50%" : "100%",
+        marginTop: 8,
+        width: Platform.OS === 'web' ? WIDTH * 0.5 : WIDTH - 20,
         backgroundColor: "#FFF",
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 2},
@@ -52,7 +54,12 @@ const styles = StyleSheet.create({
     },
     site: {
         fontSize: 15,
-        marginVertical: 8
+        marginVertical: 8,
+        fontWeight: "700"
+    },
+    time: {
+        fontSize: 15,
+        marginVertical: 8,
     },
     statusBar: {
         alignItems: "flex-end",
