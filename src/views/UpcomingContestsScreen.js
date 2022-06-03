@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {View, StyleSheet, ActivityIndicator, FlatList, Dimensions, Platform} from "react-native";
+import {View, StyleSheet, ActivityIndicator, FlatList, Dimensions, Platform, Image, Text} from "react-native";
 import Colors from "../constants/Colors";
 import ContestItem from "../components/ContestItem";
 import {Picker} from "@react-native-picker/picker";
@@ -29,6 +29,20 @@ const UpcomingContestsScreen = () => {
     useEffect(() => {
         fetchAllContests()
     }, [])
+
+    const noResultsDisplay = () => {
+        return (
+            <View style={styles.noResultContainer}>
+                <Image
+                    style={styles.noResultImage}
+                    source={require('../../assets/cross.png')}
+                />
+                <Text style={styles.noResultText}>
+                    No Results!
+                </Text>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.container}>
@@ -63,6 +77,7 @@ const UpcomingContestsScreen = () => {
                                                     filter === "Kick Start" ? originalData.filter(contest => contest.status === "BEFORE" && contest.site === "Kick Start") :
                                                         originalData.filter(contest => contest.status === "BEFORE")}
                         keyExtractor={({id}) => keyGenerator()}
+                        ListEmptyComponent={noResultsDisplay()}
                         renderItem={({item}) => (
                             <ContestItem
                                 item={item}
@@ -78,6 +93,7 @@ const UpcomingContestsScreen = () => {
 export default UpcomingContestsScreen
 
 const WIDTH = Dimensions.get("window").width
+const HEIGHT = Dimensions.get("window").height
 
 const styles = StyleSheet.create({
     container: {
@@ -103,6 +119,21 @@ const styles = StyleSheet.create({
         width: Platform.OS === 'web' ? WIDTH * 0.5 : WIDTH - 20,
         borderWidth: 0,
         backgroundColor: 'rgba(52, 52, 52, 0.0)'
+    },
+    noResultContainer: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    noResultImage: {
+        height: 100,
+        width: 100,
+        marginTop: HEIGHT * 0.2
+    },
+    noResultText: {
+        fontSize: 16,
+        fontWeight: "500",
+        marginTop: 16
     },
     errorContainer: {
         flex: 1,
