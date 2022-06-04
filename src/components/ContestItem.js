@@ -28,12 +28,26 @@ const ContestItem = ({item}) => {
             <Text style={styles.site} numberOfLines={1}>
                 {site}
             </Text>
-            <Text style={styles.time} numberOfLines={1}>
-                Start Time - {start_time}
-            </Text>
-            <Text style={styles.time} numberOfLines={1}>
-                End Time - {end_time}
-            </Text>
+            <View style={styles.timeBar}>
+                <Image
+                    style={styles.imageStart}
+                    source={require('../../assets/shuttle.png')}
+                />
+                <Text style={styles.time} numberOfLines={1}>
+                    {site === "CodeChef" ? `${start_time}` :
+                        `${new Date(start_time).toString()}`}
+                </Text>
+            </View>
+            <View style={styles.timeBar}>
+                <Image
+                    style={styles.imageStop}
+                    source={require('../../assets/finish-flag.png')}
+                />
+                <Text style={styles.time} numberOfLines={1}>
+                    {site === "CodeChef" ? `${end_time}` :
+                        `${new Date(end_time).toString()}`}
+                </Text>
+            </View>
             <View style={styles.statusBar}>
                 {status === "CODING" ?
                     <Image
@@ -70,7 +84,13 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     titleBar: {
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    timeBar: {
+        flexDirection: "row",
+        alignItems: "center",       //center vertical items inside view
+        marginVertical: 8
     },
     title: {
         fontWeight: 'bold',
@@ -85,7 +105,7 @@ const styles = StyleSheet.create({
     },
     time: {
         fontSize: 15,
-        marginVertical: 8,
+        marginStart: 10
     },
     statusBar: {
         alignItems: "flex-end",
@@ -95,6 +115,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "700",
         color: Colors.RED,
+    },
+    imageStart: {
+        height: 18,
+        width: 18
+    },
+    imageStop: {
+        height: 19,
+        width: 19
     },
     imageLive: {
         height: 20,
