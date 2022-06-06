@@ -10,6 +10,7 @@ const UpcomingContestsScreen = () => {
     const [originalData, setOriginalData] = useState([])
     const [error, setError] = useState(null)
     const [filter, setFilter] = useState()
+    const [refresh, setRefresh] = useState(false)
 
     const fetchAllContests = async () => {
         try {
@@ -21,7 +22,14 @@ const UpcomingContestsScreen = () => {
             setError(e)
         } finally {
             setLoading(false)
+            setRefresh(false)
         }
+    }
+
+    const onRefresh = () => {
+        setRefresh(true)
+        fetchAllContests()
+            .then(r => console.log("Refreshed!"))
     }
 
     const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9)
@@ -78,6 +86,8 @@ const UpcomingContestsScreen = () => {
                                                         originalData.filter(contest => contest.status === "BEFORE")}
                         keyExtractor={({id}) => keyGenerator()}
                         ListEmptyComponent={noResultsDisplay()}
+                        onRefresh={onRefresh}
+                        refreshing={refresh}
                         renderItem={({item}) => (
                             <ContestItem
                                 item={item}

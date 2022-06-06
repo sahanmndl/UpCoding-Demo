@@ -70,12 +70,10 @@ const WIDTH = Dimensions.get("window").width
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 8,
-        paddingStart: 8,
-        paddingEnd: 8,
+        padding: 8,
         borderRadius: 8,
         marginTop: 8,
-        width: Platform.OS === 'web' ? WIDTH * 0.5 : WIDTH - 20,
+        width: Platform.OS === 'web' ? WIDTH - 40 : WIDTH - 20,
         backgroundColor: "#FFF",
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 2},
