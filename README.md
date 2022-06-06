@@ -1,6 +1,8 @@
 # UpCoding
 [React Native](https://reactnative.dev/) application to showcase all live and upcoming programming contests / hackathons, using [Kontest API](https://kontests.net/api).
 
+Demo - https://upcoding.netlify.app/
+
 ## Base Dependencies
 - [react-navigation](https://reactnavigation.org/) navigation library.
 - [react-native-picker](https://www.npmjs.com/package/@react-native-picker/picker) to filter contests.
