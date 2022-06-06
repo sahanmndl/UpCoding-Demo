@@ -1,9 +1,16 @@
 import {TouchableOpacity, Text, View, Linking, Platform, StyleSheet, Dimensions, Image} from "react-native";
 import Colors from "../constants/Colors";
+import { google } from "calendar-link";
 
 const ContestItem = ({item}) => {
 
     const {name, url, start_time, end_time, site, status} = item
+
+    const addEventToCalender = {
+        title: name,
+        start: start_time,
+        end: end_time
+    }
 
     return (
         <TouchableOpacity style={styles.container} onPress={() => Linking.openURL(url.toString())}>
@@ -34,7 +41,7 @@ const ContestItem = ({item}) => {
                     source={require('../../assets/shuttle.png')}
                 />
                 <Text style={styles.time} numberOfLines={1}>
-                    {site === "CodeChef" ? `${start_time}` :
+                    {site === "CodeChef" ? `${start_time} + 05:30:00 (IST)` :
                         `${new Date(start_time).toString()}`}
                 </Text>
             </View>
@@ -44,11 +51,21 @@ const ContestItem = ({item}) => {
                     source={require('../../assets/finish-flag.png')}
                 />
                 <Text style={styles.time} numberOfLines={1}>
-                    {site === "CodeChef" ? `${end_time}` :
+                    {site === "CodeChef" ? `${end_time} + 05:30:00 (IST)` :
                         `${new Date(end_time).toString()}`}
                 </Text>
             </View>
             <View style={styles.statusBar}>
+                <TouchableOpacity
+                    style={styles.buttonAddToCalender}
+                    title="Add"
+                    onPress={() => Linking.openURL(google(addEventToCalender))}
+                >
+                    <Image
+                        style={styles.imageCalender}
+                        source={require('../../assets/add_to_calendar.png')}
+                    />
+                </TouchableOpacity>
                 {status === "CODING" ?
                     <Image
                         style={styles.imageLive}
@@ -106,8 +123,9 @@ const styles = StyleSheet.create({
         marginStart: 10
     },
     statusBar: {
-        alignItems: "flex-end",
-        justifyContent: "flex-end"
+        alignItems: "center",
+        justifyContent: "flex-end",
+        flexDirection: "row"
     },
     status: {
         fontSize: 14,
@@ -124,14 +142,26 @@ const styles = StyleSheet.create({
     },
     imageLive: {
         height: 20,
-        width: 20
+        width: 20,
+        marginStart: 15
     },
     imageTime: {
         height: 17,
-        width: 17
+        width: 17,
+        marginStart: 15
     },
     imageTitle: {
         height: 24,
         width: 24
+    },
+    imageCalender: {
+        height: 25,
+        width: 25
+    },
+    buttonAddToCalender : {
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: 'rgba(52, 52, 52, 0.0)',
+        padding: 10
     }
 })
