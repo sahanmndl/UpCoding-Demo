@@ -4,7 +4,7 @@
     "slug": "UpCoding",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo-1024.png",
+    "icon": "./assets/upcoding_icon.png",
     "userInterfaceStyle": "light",
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,11 +17,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo-1024.png",
+        "foregroundImage": "./assets/upcoding_icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.san101.upcoding",
-      "versionCode": 1
+      "versionCode": 1,
+      "icon": "./assets/upcoding_icon.png"
     },
     "web": {
       "favicon": "./assets/logo-48.png"

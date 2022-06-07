@@ -63,7 +63,7 @@ const ContestItem = ({item}) => {
                 >
                     <Image
                         style={styles.imageCalender}
-                        source={require('../../assets/add_to_calendar.png')}
+                        source={require('../../assets/add_to_calendar_2.png')}
                     />
                 </TouchableOpacity>
                 {status === "CODING" ?
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 8,
         marginTop: 8,
-        width: Platform.OS === 'web' ? WIDTH - 40 : WIDTH - 20,
+        width: Platform.OS === 'web' ? WIDTH <= 760 ? WIDTH - 20 : WIDTH * 0.5 : WIDTH - 20,
         backgroundColor: "#FFF",
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 2},
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
         width: 24
     },
     imageCalender: {
-        height: 25,
-        width: 25
+        height: 23,
+        width: 23
     },
     buttonAddToCalender : {
         alignItems: "center",
